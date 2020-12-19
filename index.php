@@ -14,7 +14,34 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/2.2.1/mdb.min.css" rel="stylesheet"/>
 </head>
 <body>
-    <h1><?= $hello; ?></h1>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container">
+            <a href="#" class="navbar-brand"><?= $hello; ?></a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <h2 class="p-2">一覧</h2>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h3 class="card-title">title 1</h3>
+                    <p class="card-text">
+                        text is here
+                    </p>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h3 class="card-title">title 2</h3>
+                    <p class="card-text">
+                        text is here
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <!-- MD Bootstrap -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/2.2.1/mdb.min.js"></script>
