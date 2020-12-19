@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1><?= $hello; ?></h1>
-    <div>
+    <div id="posts">
         <h2>一覧</h2>
         <div>
             <h3>title 1</h3>
@@ -23,6 +23,20 @@
                 text is here
             </p>
         </div>
+    </div>
+
+    <div id="form">
+        <form action="" method="POST">
+            <div>
+                <label for="title">タイトル</label>
+                <input type="" name="title">
+            </div>
+            <div>
+                <label for="article">記事</label>
+                <textarea name="article"></textarea>
+            </div>
+            <input type="submit" value="送信">
+        </form>
     </div>
 </body>
 </html>
