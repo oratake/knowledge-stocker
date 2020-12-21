@@ -1,2 +1,6 @@
 <?php
-	echo 'this is submit.php';
+	if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+	} else {
+
+	}
