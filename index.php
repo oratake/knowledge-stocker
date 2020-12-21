@@ -26,7 +26,7 @@
     </div>
 
     <div id="form">
-        <form action="" method="POST">
+        <form action="./submit.php" method="POST">
             <div>
                 <label for="title">タイトル</label>
                 <input type="" name="title">
