@@ -27,18 +27,12 @@
 	<h1><?= $hello; ?></h1>
 	<div id="posts">
 		<h2>一覧</h2>
+		<?php foreach($articles as $article): ?>
 		<div>
-			<h3>title 1</h3>
-			<p>
-				text is here
-			</p>
+			<h3><?= $article['title']; ?></h3>
+			<p><?= $article['article']; ?></p>
 		</div>
-		<div>
-			<h3>title 2</h3>
-			<p>
-				text is here
-			</p>
-		</div>
+		<?php endforeach; ?>
 	</div>
 
 	<div id="form">
