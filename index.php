@@ -43,12 +43,19 @@
 	<h1><?= $hello; ?></h1>
 	<div id="posts">
 		<h2>一覧</h2>
+
+		<?php if($articles === []): ?>
+		<div>
+			表示する記事がありません
+		</div>
+		<?php else: ?>
 		<?php foreach($articles as $article): ?>
 		<div>
 			<h3><?= $article['title']; ?></h3>
 			<p><?= $article['article']; ?></p>
 		</div>
 		<?php endforeach; ?>
+		<?php endif; ?>
 	</div>
 
 	<div id="form">
