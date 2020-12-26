@@ -5,16 +5,32 @@
 
 	function getArticles()
 	{
-		return [
-			[
-				'title' => 'タイトル1',
-				'article' => '記事1'
-			],
-			[
-				'title' => 'タイトル2',
-				'article' => '記事2'
-			],
-		];
+		$filepointer = fopen('test_article.csv', 'r');
+
+		// TODO: ファイルが空だった際の処理
+
+		// csvをパース
+		$articles_parsed = [];
+		while($row = fgetcsv($filepointer)){
+			$articles_parsed[] = $row;
+		}
+
+		// 配列を以下の形状に
+		// $articles = [
+		//     'title'   => 'タイトル',
+		//     'article' => '記事内容',
+		// ]
+		$articles = [];
+		foreach($articles_parsed as $article_parsed){
+			$articles[] = [
+				'title' => $article_parsed[0],
+				'article' => $article_parsed[1],
+				];
+		}
+
+		fclose($filepointer);
+
+		return $articles;
 	}
 ?>
 <!DOCTYPE html>
