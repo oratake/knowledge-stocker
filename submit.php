@@ -30,7 +30,7 @@
 				exit;
 			}
 
-			$line = $title.','.$article;
+			$line = $id.','.$title.','.$article;
 			fwrite($article_filepointer, $line."\n");
 			fclose($article_filepointer);
 
