@@ -24,13 +24,27 @@
 
 		if(is_writable($filename)){
 			// fopenは開けないとき(bool)falseが返る
-			$article_filepointer = fopen($filename, 'a');
+			$article_filepointer = fopen($filename, 'c+');
 			if($article_filepointer === false){
 				echo 'ファイルが開けませんでした';
 				exit;
 			}
 
-			$line = $id.','.$title.','.$article;
+			// idを振る
+			// csvをパース
+			$articles_parsed = [];
+			while($row = fgetcsv($article_filepointer)){
+				$articles_parsed[] = $row;
+			}
+			// 最後のidを取得
+			$last_id = 0;
+			foreach($articles_parsed as $article_parsed) {
+				if($last_id < $articles_parsed[0]){
+					$last_id = $article_parsed[0];
+				}
+			}
+
+			$line = ($last_id + 1).','.$title.','.$article;
 			fwrite($article_filepointer, $line."\n");
 			fclose($article_filepointer);
 
