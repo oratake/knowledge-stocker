@@ -39,13 +39,13 @@
 			// 最後のidを取得
 			$last_id = 0;
 			foreach($articles_parsed as $article_parsed) {
-				if($last_id < $articles_parsed[0]){
-					$last_id = $article_parsed[0];
+				if($last_id <= (int)$article_parsed[0]){
+					$last_id = (int)$article_parsed[0];
 				}
 			}
 
-			$line = ($last_id + 1).','.$title.','.$article;
-			fwrite($article_filepointer, $line."\n");
+			$article_line = [($last_id + 1), $title, $article];
+			fputcsv($article_filepointer, $article_line, ',');
 			fclose($article_filepointer);
 
 			return true;
