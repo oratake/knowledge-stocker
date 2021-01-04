@@ -28,33 +28,33 @@
 	{
 		$filename = 'test_article.csv';
 
-		if(is_writable($filename)){
-			// fopenは開けないとき(bool)falseが返る
-			$article_filepointer = fopen($filename, 'c+');
-			if($article_filepointer === false){
-				return 1;
-			}
-
-			// idを振る
-			// csvをパース
-			$articles_parsed = [];
-			while($row = fgetcsv($article_filepointer)){
-				$articles_parsed[] = $row;
-			}
-			// 最後のidを取得
-			$last_id = 0;
-			foreach($articles_parsed as $article_parsed) {
-				if($last_id <= (int)$article_parsed[0]){
-					$last_id = (int)$article_parsed[0];
-				}
-			}
-
-			$article_line = [($last_id + 1), $title, $article];
-			fputcsv($article_filepointer, $article_line, ',');
-			fclose($article_filepointer);
-
-			return 0;
-		} else {
+		if(!is_writable($filename)) {
 			return 2;
 		}
+
+		// fopenは開けないとき(bool)falseが返る
+		$article_filepointer = fopen($filename, 'c+');
+		if($article_filepointer === false){
+			return 1;
+		}
+
+		// idを振る
+		// csvをパース
+		$articles_parsed = [];
+		while($row = fgetcsv($article_filepointer)){
+			$articles_parsed[] = $row;
+		}
+		// 最後のidを取得
+		$last_id = 0;
+		foreach($articles_parsed as $article_parsed) {
+			if($last_id <= (int)$article_parsed[0]){
+				$last_id = (int)$article_parsed[0];
+			}
+		}
+
+		$article_line = [($last_id + 1), $title, $article];
+		fputcsv($article_filepointer, $article_line, ',');
+		fclose($article_filepointer);
+
+		return 0;
 	}
