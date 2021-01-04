@@ -1,5 +1,9 @@
 <?php
 
+	const SUBMIT_STATUS_SUCCESS = 0;
+	const SUBMIT_STATUS_ERROR_COULD_NOT_OPENED = 1;
+	const SUBMIT_STATUS_ERROR_COULD_NOT_WRITTEN = 2;
+
 	if($_SERVER['REQUEST_METHOD'] !== 'POST'){
 		echo 'POSTではないです';
 		exit;
@@ -12,30 +16,30 @@
 
 	// 記事の投稿
 	switch(submitArticle($_POST['title'], $_POST['article'])) {
-		case 0:
+		case SUBMIT_STATUS_SUCCESS:
 			echo '書き込めました';
 			break;
-		case 1:
+		case SUBMIT_STATUS_ERROR_COULD_NOT_OPENED:
 			echo 'ファイルが開けませんでした';
 			break;
-		case 2:
+		case SUBMIT_STATUS_ERROR_COULD_NOT_WRITTEN:
 			echo '書き込めませんでした';
 			break;
 	};
 	exit;
 
-	function submitArticle($title, $article)
+	function submitArticle($title, $article):int
 	{
 		$filename = 'test_article.csv';
 
 		if(!is_writable($filename)) {
-			return 2;
+			return SUBMIT_STATUS_ERROR_COULD_NOT_WRITTEN;
 		}
 
 		// fopenは開けないとき(bool)falseが返る
 		$article_filepointer = fopen($filename, 'c+');
 		if($article_filepointer === false){
-			return 1;
+			return SUBMIT_STATUS_ERROR_COULD_NOT_OPENED;
 		}
 
 		// idを振る
@@ -56,5 +60,5 @@
 		fputcsv($article_filepointer, $article_line, ',');
 		fclose($article_filepointer);
 
-		return 0;
+		return SUBMIT_STATUS_SUCCESS;
 	}
