@@ -11,12 +11,18 @@
 	}
 
 	// 記事の投稿
-	submitArticle($_POST['title'], $_POST['article']);
-	echo '書き込めました';
+	switch(submitArticle($_POST['title'], $_POST['article'])) {
+		case 0:
+			echo '書き込めました';
+			break;
+		case 1:
+			echo 'ファイルが開けませんでした';
+			break;
+		case 2:
+			echo '書き込めませんでした';
+			break;
+	};
 	exit;
-
-	// echo 'タイトル: '.$_POST['title']."\n";
-	// echo '内容: '.$_POST['article'];
 
 	function submitArticle($title, $article)
 	{
@@ -26,8 +32,7 @@
 			// fopenは開けないとき(bool)falseが返る
 			$article_filepointer = fopen($filename, 'c+');
 			if($article_filepointer === false){
-				echo 'ファイルが開けませんでした';
-				exit;
+				return 1;
 			}
 
 			// idを振る
@@ -48,9 +53,8 @@
 			fputcsv($article_filepointer, $article_line, ',');
 			fclose($article_filepointer);
 
-			return true;
+			return 0;
 		} else {
-			echo '書き込めませんでした';
-			exit;
+			return 2;
 		}
 	}
