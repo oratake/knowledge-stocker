@@ -17,7 +17,7 @@
 	// 記事の投稿
 	switch(submitArticle($_POST['title'], $_POST['article'])) {
 		case SUBMIT_STATUS_SUCCESS:
-			echo '書き込めました';
+			header('Location: ./index.php');
 			break;
 		case SUBMIT_STATUS_ERROR_COULD_NOT_OPENED:
 			echo 'ファイルが開けませんでした';
