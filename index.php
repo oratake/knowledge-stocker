@@ -3,8 +3,28 @@
 
 	$articles = getArticles();
 
+
+
 	function getArticles()
 	{
+		// PDO動作確認
+		$dsn = 'mysql:host=mysql;dbname=knowledge_db;charset=utf8';
+		$db_user = 'root';
+		$db_pass = 'root';
+
+		try {
+			$pdo = new PDO($dsn, $db_user, $db_pass);
+		} catch (PDOException $e) {
+			exit('DB接続失敗'.$e->getMessage());
+		}
+		exit('DB接続成功');
+	}
+
+
+
+	function testGetArticles()
+	{
+		exit;
 		$filepointer = fopen('test_article.csv', 'r');
 
 		// TODO: ファイルが空だった際の処理
