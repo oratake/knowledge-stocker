@@ -24,41 +24,6 @@
 
 		return $articles;
 	}
-
-
-
-	function testGetArticles()
-	{
-		exit;
-		$filepointer = fopen('test_article.csv', 'r');
-
-		// TODO: ファイルが空だった際の処理
-
-		// csvをパース
-		$articles_parsed = [];
-		while($row = fgetcsv($filepointer)){
-			$articles_parsed[] = $row;
-		}
-
-		// 配列を以下の形状に
-		// $articles = [
-		//     'id'      => 'id',
-		//     'title'   => 'タイトル',
-		//     'article' => '記事内容',
-		// ]
-		$articles = [];
-		foreach($articles_parsed as $article_parsed){
-			$articles[] = [
-				'id' => $articles_parsed[0],
-				'title' => $article_parsed[1],
-				'article' => $article_parsed[2],
-				];
-		}
-
-		fclose($filepointer);
-
-		return $articles;
-	}
 ?>
 <!DOCTYPE html>
 <html>
