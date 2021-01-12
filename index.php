@@ -2,8 +2,6 @@
 	$hello = 'Hello, world.';
 
 	$articles = getArticles();
-	var_dump($articles);
-	exit;
 
 
 
@@ -81,7 +79,7 @@
 		<?php foreach($articles as $article): ?>
 		<div>
 			<h3><?= $article['title']; ?></h3>
-			<p><?= $article['article']; ?></p>
+			<p><?= $article['article_body']; ?></p>
 		</div>
 		<?php endforeach; ?>
 		<?php endif; ?>
