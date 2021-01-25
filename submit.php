@@ -1,9 +1,4 @@
-<?php
-
-	const SUBMIT_STATUS_SUCCESS = 0;
-	const SUBMIT_STATUS_ERROR_COULD_NOT_OPENED = 1;
-	const SUBMIT_STATUS_ERROR_COULD_NOT_WRITTEN = 2;
-
+<?php declare(strict_types=1);
 	if($_SERVER['REQUEST_METHOD'] !== 'POST'){
 		echo 'POSTではないです';
 		exit;
@@ -15,22 +10,22 @@
 	}
 
 	// 記事の投稿
-	switch(submitArticle($_POST['title'], $_POST['article'])) {
-		case SUBMIT_STATUS_SUCCESS:
-			header('Location: ./index.php');
-			break;
-		case SUBMIT_STATUS_ERROR_COULD_NOT_OPENED:
-			echo 'ファイルが開けませんでした';
-			break;
-		case SUBMIT_STATUS_ERROR_COULD_NOT_WRITTEN:
-			echo '書き込めませんでした';
-			break;
+	if(submitArticle($_POST['title'], $_POST['article'])) {
+		header('Location: ./index.php');
+		exit;
 	};
-	exit;
+	exit('Submit Error.');
 
 
 
-	function submitArticle($title, $article): int
+	/**
+	 * submitArticle
+	 *
+	 * @param $title
+	 * @param $article
+	 * @return bool
+	 */
+	function submitArticle($title, $article): bool
 	{
 		// data source nameの指定
 		$dsn = 'mysql:host=mysql;dbname=knowledge_db;charset=utf8';
@@ -57,5 +52,5 @@
 			exit('DB更新失敗'.$e->getMessage());
 		}
 
-		return SUBMIT_STATUS_SUCCESS;
+		return true;
 	}
