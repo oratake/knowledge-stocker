@@ -57,35 +57,5 @@
 			exit('DB更新失敗'.$e->getMessage());
 		}
 
-		// $filename = 'test_article.csv';
-
-		// if(!is_writable($filename)) {
-		// 	return SUBMIT_STATUS_ERROR_COULD_NOT_WRITTEN;
-		// }
-
-		// // fopenは開けないとき(bool)falseが返る
-		// $article_filepointer = fopen($filename, 'c+');
-		// if($article_filepointer === false){
-		// 	return SUBMIT_STATUS_ERROR_COULD_NOT_OPENED;
-		// }
-
-		// // idを振る
-		// // csvをパース
-		// $articles_parsed = [];
-		// while($row = fgetcsv($article_filepointer)){
-		// 	$articles_parsed[] = $row;
-		// }
-		// // 最後のidを取得
-		// $last_id = 0;
-		// foreach($articles_parsed as $article_parsed) {
-		// 	if($last_id <= (int)$article_parsed[0]){
-		// 		$last_id = (int)$article_parsed[0];
-		// 	}
-		// }
-
-		// $article_line = [($last_id + 1), $title, $article];
-		// fputcsv($article_filepointer, $article_line, ',');
-		// fclose($article_filepointer);
-
 		return SUBMIT_STATUS_SUCCESS;
 	}
