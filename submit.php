@@ -28,8 +28,35 @@
 	};
 	exit;
 
-	function submitArticle($title, $article):int
+
+
+	function submitArticle($title, $article): int
 	{
+		// data source nameの指定
+		$dsn = 'mysql:host=mysql;dbname=knowledge_db;charset=utf8';
+		$db_user = 'root';
+		$db_pass = 'root';
+
+		try {
+			$dbh = new PDO($dsn, $db_user, $db_pass);
+		} catch (PDOException $e) {
+			exit('DB接続失敗'.$e->getMessage());
+		}
+
+		$stmt = $dbh->prepare("INSERT INTO tbl_articles (title, article_body) values (:title, :article)");
+
+		$dbh->beginTransaction();
+
+		try {
+			$stmt->execute([
+				':title' => $title,
+				':article' => $article,
+			]);
+			$dbh->commit();
+		} catch (PDOException $e) {
+			exit('DB更新失敗'.$e->getMessage());
+		}
+
 		// $filename = 'test_article.csv';
 
 		// if(!is_writable($filename)) {
@@ -60,5 +87,5 @@
 		// fputcsv($article_filepointer, $article_line, ',');
 		// fclose($article_filepointer);
 
-		// return SUBMIT_STATUS_SUCCESS;
+		return SUBMIT_STATUS_SUCCESS;
 	}
